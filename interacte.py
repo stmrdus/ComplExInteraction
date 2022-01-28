@@ -324,8 +324,25 @@ class Main(object):
         left_results = self.predict(split=split, mode='tail_batch')
         right_results = self.predict(split=split, mode='head_batch')
         results = get_combined_results(left_results, right_results)
-        self.logger.info('[Epoch {} {}]: MRR: Tail : {:.5}, Head : {:.5}, Avg : {:.5}'.format(
-            epoch, split, results['left_mrr'], results['right_mrr'], results['mrr']))
+        res_mrr = '\n\tMRR: Tail : {:.5}, Head : {:.5}, Avg : {:.5}\n'.format(
+            results['left_mrr'], results['right_mrr'], results['mrr'])
+        res_mr = '\tMR: Tail : {:.5}, Head : {:.5}, Avg : {:.5}\n'.format(
+            results['left_mr'], results['right_mr'], results['mr'])
+        res_hit1 = '\tHit-1: Tail : {:.5}, Head : {:.5}, Avg : {:.5}\n'.format(
+            results['left_hits@1'], results['right_hits@1'], results['hits@1'])
+        res_hit3 = '\tHit-3: Tail : {:.5}, Head : {:.5}, Avg : {:.5}\n'.format(
+            results['left_hits@3'], results['right_hits@3'], results['hits@3'])
+        res_hit10 = '\tHit-10: Tail : {:.5}, Head : {:.5}, Avg : {:.5}'.format(
+            results['left_hits@10'], results['right_hits@10'], results['hits@10'])
+        log_res = res_mrr + res_mr + res_hit1 + res_hit3 + res_hit10
+
+        #self.logger.info('[Epoch {} {}]: MRR: Tail : {:.5}, Head : {:.5}, Avg : {:.5}'.format(epoch, split, results['left_mrr'], results['right_mrr'], results['mrr']))
+        if (epoch + 1) % 10 == 0 or split == 'test':
+            self.logger.info(
+                '[Evaluating Epoch {} {}]: {}'.format(epoch, split, log_res))
+        else:
+            self.logger.info(
+                '[Evaluating Epoch {} {}]: {}'.format(epoch, split, res_mrr))
         return results
 
     def predict(self, split='valid', mode='tail_batch'):

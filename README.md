@@ -29,6 +29,8 @@ Nhut-Nam Le - [@Namlee298](https://twitter.com/Namlee298) - lenam.fithcmus@gmail
 
 Project Link: [https://github.com/nhutnamhcmus/ComplExInteraction](https://github.com/nhutnamhcmus/ComplExInteraction)
 
+This project is based on [https://github.com/malllabiisc/InteractE](https://github.com/malllabiisc/InteractE)
+
 ## Acknowledgements 
 
 This research is funded by the University of Science, VNU-HCM, Vietnam under grant number CNTT 2022-2 and Advanced Program in Computer Science.
